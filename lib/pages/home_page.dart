@@ -7,7 +7,7 @@ class Homepagge extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Catelog '),
+          title: Text('Home '),
         ),
         body: SafeArea(
           child: Center(

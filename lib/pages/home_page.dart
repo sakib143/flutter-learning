@@ -9,7 +9,6 @@ class Homepagge extends StatelessWidget {
         appBar: AppBar(
           title: Text('Catelog '),
         ),
-        backgroundColor: Colors.teal,
         body: SafeArea(
           child: Center(
             child: Container(
@@ -17,6 +16,7 @@ class Homepagge extends StatelessWidget {
             ),
           ),
         ),
+        drawer: Drawer(),
       ),
     );
   }

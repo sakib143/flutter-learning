@@ -54,38 +54,40 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ]),
                 ),
-                InkWell(
-                  onTap: () async {
-                    setState(() {
-                      changeButton = true;
-                    }); // For update UI
-
-                    await Future.delayed(Duration(seconds: 1));
-                    Navigator.pushNamed(context, MyRoutess.homeRoute);
-                  },
-                  child: AnimatedContainer(
-                    duration: Duration(seconds: 1),
-                    alignment: Alignment.center,
-                    width: changeButton? 50 : 150,
-                    height: 50.0,
-                    child: changeButton ? Icon(Icons.done, color: Colors.white,) : Text(
-                      'Login',
-                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                Material(
+                  color: Colors.deepPurple,
+                  borderRadius: BorderRadius.circular(changeButton ? 50 : 8),
+                  child: InkWell(
+                    onTap: () async {
+                      setState(() {
+                        changeButton = true;
+                      }); // For update UI
+                      await Future.delayed(Duration(seconds: 1));
+                      await Navigator.pushNamed(
+                          context, MyRoutess.homeRoute); //Restore if user back
+                      //Restore if user back
+                      setState(() {
+                        changeButton = false;
+                      });
+                    },
+                    child: AnimatedContainer(
+                      duration: Duration(seconds: 1),
+                      alignment: Alignment.center,
+                      width: changeButton ? 50 : 150,
+                      height: 50.0,
+                      child: changeButton
+                          ? Icon(
+                              Icons.done,
+                              color: Colors.white,
+                            )
+                          : Text(
+                              'Login',
+                              style: TextStyle(
+                                  fontSize: 20.0, color: Colors.white),
+                            ),
                     ),
-                    decoration: BoxDecoration(
-                        color: Colors.deepPurple,
-                        // shape: changeButton? BoxShape.circle : BoxShape.rectangle
-                        borderRadius: BorderRadius.circular(changeButton ? 50 : 8)),
                   ),
-                // )
-                // ElevatedButton(
-                //   onPressed: () {
-                //     print('Button clicked !!!');
-                //     Navigator.pushNamed(context, MyRoutess.homeRoute);
-                //   },
-                //   child: Text('Login'),
-                //   style: TextButton.styleFrom(minimumSize: Size(150, 40)),
-                )
+                ),
               ],
             ),
           ),

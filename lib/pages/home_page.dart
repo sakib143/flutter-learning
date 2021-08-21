@@ -23,6 +23,7 @@ class Homepagge extends StatelessWidget {
               //   return ItemWidget(item: CatalogModel.items[index]);
               // },
 
+
               //Here we have load static array value.
               itemCount: dummyList.length,
               itemBuilder: (context,index) {

@@ -8,7 +8,6 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final profilePicUrl =
         'https://media-exp1.licdn.com/dms/image/C5103AQFFhm5t-u4FoA/profile-displayphoto-shrink_100_100/0/1548295689142?e=1633564800&v=beta&t=tEL9cD1jwDhwQv-3GnMskZPje9jMUza-hro-lA8MNps';
-
     return Drawer(
       child: Container(
         color: Colors.blue,

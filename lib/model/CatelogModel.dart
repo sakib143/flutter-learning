@@ -1,5 +1,5 @@
 class CatalogModel {
-  static final items = [
+  static List<Item> items = [
     Item(
         id: 1,
         name: "iPhone 12 Pro",
@@ -19,6 +19,7 @@ class Item {
   final String color;
   final String image;
 
+  //This constructor is usedful for above static listing.
   Item(
       {required this.id, required this.name, required this.desc, required this.price, required this.color, required this.image});
 

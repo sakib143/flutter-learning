@@ -25,11 +25,15 @@ class _HomepaggeState extends State<Homepagge> {
    var mEncodeJson =  await rootBundle.loadString('assets/files/catelog.json');
    //After getting json formated value, now we need to decode to object.
    var mDecodeJson = jsonDecode(mEncodeJson);
+   var productArray = mDecodeJson['products'];
+   CatalogModel.items = List.from(productArray).map<Item>((itm) => Item.fromMap(itm)).toList();
+
+   setState(() {});
+
   }
 
   @override
   Widget build(BuildContext context) {
-    final dummyList = List.generate(5, (index) => CatalogModel.items[0]);
 
     return MaterialApp(
       home: Scaffold(
@@ -40,16 +44,9 @@ class _HomepaggeState extends State<Homepagge> {
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: ListView.builder(
-              // itemCount: CatalogModel.items.length,
-              // itemBuilder: (context,index) {
-              //   return ItemWidget(item: CatalogModel.items[index]);
-              // },
-
-
-              //Here we have load static array value.
-              itemCount: dummyList.length,
+              itemCount: CatalogModel.items.length,
               itemBuilder: (context,index) {
-                return ItemWidget(item: dummyList[index]);
+                return ItemWidget(item: CatalogModel.items[index]);
               },
             ),
           ),

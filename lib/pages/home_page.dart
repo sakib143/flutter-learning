@@ -22,6 +22,7 @@ class _HomepaggeState extends State<Homepagge> {
   }
 
   void loadData() async {
+    await Future.delayed(Duration(seconds: 5));
    var mEncodeJson =  await rootBundle.loadString('assets/files/catelog.json');
    //After getting json formated value, now we need to decode to object.
    var mDecodeJson = jsonDecode(mEncodeJson);
@@ -34,7 +35,6 @@ class _HomepaggeState extends State<Homepagge> {
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -43,12 +43,14 @@ class _HomepaggeState extends State<Homepagge> {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(10.0),
-            child: ListView.builder(
+            child:(CatalogModel.items.isNotEmpty ) ? ListView.builder(
               itemCount: CatalogModel.items.length,
               itemBuilder: (context,index) {
                 return ItemWidget(item: CatalogModel.items[index]);
               },
-            ),
+            ) : Center(
+              child: CircularProgressIndicator(),
+            ) ,
           ),
         ),
         drawer: MyDrawer(),

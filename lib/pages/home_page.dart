@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:testing/model/CatelogModel.dart';
+import 'package:testing/utils/MyRoutes.dart';
 import 'package:testing/widgets/MyTheme.dart';
 import 'package:testing/widgets/home_widget/Catelog_header.dart';
 import 'package:testing/widgets/home_widget/catelog_list.dart';
@@ -35,6 +37,11 @@ class _HomepaggeState extends State<Homepagge> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: MyTheme.creamColor,
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: MyTheme.darkBluishColor,
+          child: Icon(CupertinoIcons.cart),
+          onPressed: () => Navigator.pushNamed(context, MyRoutess.cartRoute),
+        ),
         body: SafeArea(
           child: Container(
             padding: Vx.m32,
@@ -45,7 +52,7 @@ class _HomepaggeState extends State<Homepagge> {
                 if (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
                   CatalogList().py16().expand()
                 else
-                    CircularProgressIndicator().centered().expand()
+                  CircularProgressIndicator().centered().expand()
               ],
             ),
           ),

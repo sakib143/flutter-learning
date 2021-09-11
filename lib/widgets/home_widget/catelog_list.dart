@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:testing/model/CatelogModel.dart';
+import 'package:testing/pages/home_details.dart';
+import 'package:testing/utils/MyRoutes.dart';
 import 'package:testing/widgets/MyTheme.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -12,7 +14,15 @@ class CatalogList extends StatelessWidget {
       itemCount: CatalogModel.items.length,
       itemBuilder: (context, index) {
         final catalog = CatalogModel.items[index];
-        return CatalogItem(catelog: catalog);
+        return InkWell(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomeDetails(catelog: catalog),
+            ),
+          ),
+          child: CatalogItem(catelog: catalog),
+        );
       },
     );
   }
@@ -31,7 +41,10 @@ class CatalogItem extends StatelessWidget {
     return VxBox(
         child: Row(
       children: [
-        CatelogImage(image: catelog.image),
+        Hero(
+          tag: Key(catelog.id.toString()),
+          child: CatelogImage(image: catelog.image),
+        ),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +57,7 @@ class CatalogItem extends StatelessWidget {
                 alignment: MainAxisAlignment.spaceBetween,
                 buttonPadding: EdgeInsets.zero,
                 children: [
-                   "\$${catelog.price}".text.bold.xl.make(),
+                  "\$${catelog.price}".text.bold.xl.make(),
                   ElevatedButton(
                     onPressed: () {},
                     style: ButtonStyle(

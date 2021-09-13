@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
+
 import 'package:testing/model/CatelogModel.dart';
+import 'package:testing/model/cart_model.dart';
 import 'package:testing/pages/home_details.dart';
 import 'package:testing/utils/MyRoutes.dart';
 import 'package:testing/widgets/MyTheme.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class CatalogList extends StatelessWidget {
   @override
@@ -58,17 +60,7 @@ class CatalogItem extends StatelessWidget {
                 buttonPadding: EdgeInsets.zero,
                 children: [
                   "\$${catelog.price}".text.bold.xl.make(),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                          MyTheme.darkBluishColor,
-                        ),
-                        shape: MaterialStateProperty.all(
-                          StadiumBorder(),
-                        )),
-                    child: "Add to cart".text.make(),
-                  )
+                  AddToCart(item: catelog)
                 ],
               )
             ],
@@ -76,6 +68,38 @@ class CatalogItem extends StatelessWidget {
         )
       ],
     )).white.square(150).roundedLg.py12.make();
+  }
+}
+
+class AddToCart extends StatefulWidget {
+  final Item item;
+  const AddToCart({Key? key, required this.item}) : super(key: key);
+  @override
+  State<AddToCart> createState() => _AddToCartState();
+}
+
+class _AddToCartState extends State<AddToCart> {
+ bool isAdded = false;
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        isAdded = isAdded.toggle(); //VelocityX library change boolean value simulatniosly
+        final _catelog = CatalogModel();
+        final _cart = CartModel();
+        _cart.catelog = _catelog;
+        _cart.addItem(widget.item);
+        setState(() {});
+      },
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(
+            MyTheme.darkBluishColor,
+          ),
+          shape: MaterialStateProperty.all(
+            StadiumBorder(),
+          )),
+      child: isAdded ? Icon(Icons.done) : "Add to cart".text.make(),
+    );
   }
 }
 

@@ -1,15 +1,19 @@
 import 'dart:convert';
 
 class CatalogModel {
-  static List<Item> items = []; 
+  //Creating Catalog class as a Singleton class
+  static final model = CatalogModel._internal();
+  CatalogModel._internal();
+  factory CatalogModel() => model;
+
+  static List<Item> items = [];
 
   //Get Item by id
-  Item byId(int id) => items.firstWhere((element) => element.id == id , orElse: null) ;
+  Item byId(int id) =>
+      items.firstWhere((element) => element.id == id, orElse: null);
 
   //Get Item by position
   Item byPosition(int position) => items[position];
-
-
 
   // [
   //   Item(
@@ -91,24 +95,23 @@ class Item {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Item &&
-      other.id == id &&
-      other.name == name &&
-      other.desc == desc &&
-      other.price == price &&
-      other.color == color &&
-      other.image == image;
+        other.id == id &&
+        other.name == name &&
+        other.desc == desc &&
+        other.price == price &&
+        other.color == color &&
+        other.image == image;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      name.hashCode ^
-      desc.hashCode ^
-      price.hashCode ^
-      color.hashCode ^
-      image.hashCode;
+        name.hashCode ^
+        desc.hashCode ^
+        price.hashCode ^
+        color.hashCode ^
+        image.hashCode;
   }
-
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testing/model/cart_model.dart';
 import 'package:testing/widgets/MyTheme.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -15,7 +16,7 @@ class MyCartPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-         CartList().p32().expand(),
+          CartList().p32().expand(),
           Divider(),
           CartTotal(),
         ],
@@ -25,6 +26,7 @@ class MyCartPage extends StatelessWidget {
 }
 
 class CartTotal extends StatelessWidget {
+   final CartModel model = CartModel();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -32,10 +34,15 @@ class CartTotal extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          "\$50".text.xl.make(),
+          "\$${model.totalPrice}".text.xl.make(),
           30.widthBox,
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              //Showing snackbar
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: "Buying not supported yet.".text.make()),
+              );
+            },
             child: "Buy".text.make(),
           )
         ],
@@ -45,19 +52,18 @@ class CartTotal extends StatelessWidget {
 }
 
 class CartList extends StatelessWidget {
-  const CartList({Key? key}) : super(key: key);
-
+  final CartModel model = CartModel();
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 5,
+      itemCount: model.items.length,
       itemBuilder: (context, index) => ListTile(
         leading: Icon(Icons.done),
         trailing: IconButton(
-          onPressed: (){},
+          onPressed: () {},
           icon: Icon(Icons.remove_circle_outline),
         ),
-        title: "Product one".text.make(),
+        title: model.items[index].name.text.make(),
       ),
     );
   }
